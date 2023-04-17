@@ -28,8 +28,12 @@ vector<string> filterWordsByLen(int wordLen, const vector<string>& vocabulary)
 {
     vector<string> answer;
     //Write your code here
-    for(string word: vocabulary)
-        if(word.length() == wordLen) answer.push_back(word);
+    for (string x : vocabulary)
+    {
+        if (x.length()==wordLen)
+         answer.push_back(x);
+    }
+
     return answer;
 }
 
@@ -58,10 +62,15 @@ map<char, int> countOccurrences(const vector<string>& candidateWords)
 {
     map<char, int> answer;
     //Write your code here
-    for(string word: candidateWords)
-    for (int i=0;i<word.length();i++)
-            answer[word[i]]++;
-    return answer;
+    for (string  x : candidateWords)
+    {
+        for (int i=0;i<x.size();i++)
+        {
+            answer[x[i]]++;
+        }
+
+    }
+     return answer;
 }
 
 /***
@@ -76,13 +85,16 @@ char findMostFrequentChar(const map<char, int>& occurrences, const set<char>& se
 {
     char answer;
     //Write your code here
-    int maxOccur = 0;
-    for(auto [ch, occur]: occurrences)
+    int res=-1e9;
+    for (auto it : occurrences)
     {
-        if(selectedChars.count(ch) == 0 && occur > maxOccur)
+        if (selectedChars.find(it.first) == selectedChars.end())
         {
-            answer = ch;
-            maxOccur = occur;
+            if (it.second > res)
+            {
+                res=it.second;
+                answer=it.first;
+            }
         }
     }
     return answer;
@@ -100,7 +112,7 @@ char findBestChar(const vector<string>& candidateWords, const set<char>& selecte
 {
     char answer;
     //Write your code here
-    char answer = findMostFrequentChar(countOccurrences(candidateWords), selectedChars);
+     answer = findMostFrequentChar(countOccurrences(candidateWords), selectedChars);
     return answer;
 }
 
@@ -123,7 +135,7 @@ string getWordMask(char nextChar)
 
 bool isCorrectChar(char ch, const string& mask)
 {
-    bool answer;
+    bool answer = false;
     //Write your code here
     for(char c: mask) 
         if(c == ch) return true;
