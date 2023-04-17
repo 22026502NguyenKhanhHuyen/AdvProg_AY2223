@@ -29,7 +29,7 @@ vector<string> filterWordsByLen(int wordLen, const vector<string>& vocabulary)
     vector<string> answer;
     //Write your code here
     for(string word: vocabulary)
-        if((int)word.size() == wordLen) answer.push_back(word);
+        if(word.length() == wordLen) answer.push_back(word);
     return answer;
 }
 
@@ -59,8 +59,8 @@ map<char, int> countOccurrences(const vector<string>& candidateWords)
     map<char, int> answer;
     //Write your code here
     for(string word: candidateWords)
-    for(char c: word)
-        answer[c] ++;
+    for (int i=0;i<word.length();i++)
+            answer[word[i]]++;
     return answer;
 }
 
@@ -165,7 +165,7 @@ bool wordConformToMask(const string& word, const string& mask, char ch)
 {
     //bool answer;
     //Write your code here
-    for(int i = 0; i < (int)word.size(); i ++)
+    for(int i = 0; i < (int)word.length(); i ++)
         if(mask[i] != '-' && mask[i] != word[i])
             return false;
     return true;
